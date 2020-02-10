@@ -3,6 +3,10 @@
 #include <string>
 using namespace std;
 
+//*********************************************************************************
+//LISTA SIMPLE ENLAZADA ORDENADA QUE GUARDA LAS PALABRAS BUSCADAS
+//*********************************************************************************
+
 class NodeWordSerched{
     public:
         string original_word;  // original word that was serched

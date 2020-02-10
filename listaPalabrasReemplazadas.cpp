@@ -3,6 +3,10 @@
 #include <string>
 using namespace std;
 
+//*********************************************************************************
+//LISTA SIMPLE ENLAZADA ORDENADA QUE GUARDA LAS PALABRAS REEMPLAZDAS
+//*********************************************************************************
+
 class NodeWordReplaced{
     public:
         string word_replaced; //palabra que se puso como reemplazo

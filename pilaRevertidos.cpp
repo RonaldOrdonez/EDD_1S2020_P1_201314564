@@ -3,6 +3,10 @@
 #include <string>
 using namespace std;
 
+//*********************************************************************************
+// PILA QUE GUARDA LAS PALABRAS QUE FUERON REVERTIDAS AL PRESIONAR CTRL+Z
+//*********************************************************************************
+
 class NodeReversed{
     public:
         string word_serched;
