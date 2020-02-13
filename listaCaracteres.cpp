@@ -1,6 +1,8 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string>
+#include <sstream>
+#include <fstream>
 using namespace std;
 
 //*************************************************************************************
@@ -92,8 +94,61 @@ class ListCharacters{
             cout<<"anterior="<<temp->previous->character<<endl;
             cout<<"siguiente="<<"NULL"<<endl;
         }
+
+        /********************************************************************
+         * METODO PARA GRAFICAR LA LISTA DOBLEMENTE ENLAZADA
+        *********************************************************************/
+       void graphList(){
+           if(first==NULL){
+               cout<<"Lista Vacia";
+           }
+           else{
+               NodeCharacter* aux=first;
+               int numNode=0;
+               string scriptGraph = "digraph caracteres{ \n";
+               scriptGraph+="node[shape=record]; \n";                                   
+               while(aux->next!=NULL){                                  
+                   scriptGraph+="node"+to_string(numNode)+"[label=";
+                   scriptGraph+=aux->character;
+                   scriptGraph+="];\n";                   
+                   scriptGraph+="node"+to_string(numNode);
+                   numNode=numNode+1;                   
+                   scriptGraph+="->node"+to_string(numNode);
+                   scriptGraph+=";\n";               
+                   scriptGraph+="node"+to_string(numNode); 
+                   numNode=numNode-1;                  
+                   scriptGraph+="->node"+to_string(numNode);
+                   scriptGraph+=";\n";
+                   numNode++;
+                   aux=aux->next;
+               }
+               scriptGraph+="node"+to_string(numNode)+"[label=";
+               scriptGraph+=aux->character;
+               scriptGraph+="];\n";         
+               scriptGraph+="}";
+
+               ofstream myFile;              
+               myFile.open("listaCaracteres.dot");
+               myFile<<scriptGraph;
+               myFile.close();
+               system("dot -Tpng listaCaracteres.dot -o listaCaracteres.png");               
+               system("shotwell listaCaracteres.png");
+               
+            
+            /*PARA UTILIZAR EN WINDOWS
+            const char* cmdCrear="dot -Tpng caracteres.dot -o ListaCaracteres.png";
+            const char* cmdExecute="cmd /c start ListaCaracteres.png";
+            system(cmdCrear);
+            system(cmdExecute);
+            */
+               
+           }
+       }
+
+        
 };
 
+/*
 int main()
 {
     ListCharacters* list = new ListCharacters();
@@ -102,10 +157,15 @@ int main()
     list->addNode('c');
     list->addNode('d');
     list->addNode('e');
+    list->addNode('f');
+    list->addNode('g');
+    list->addNode('h');
     cout<<"\n";
     list->showList();
+    list->graphList();
+
     list->deleteNode();
     cout<<"DESPUES DE ELIMINAR\n";
     list->showList();
     return 0;
-}
+}*/
