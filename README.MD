@@ -6,4 +6,4 @@ Id: 201314564<br>
 E-mail: ronald.inge2013@gmail.com<br>
 
 ### Description
-Basic text editor made in c ++ language, using basic data structure such as lists, stacks and queues in all its variants.
+Basic text editor made in c ++ language, using basic data structure such as lists, stacks and queues in all its variants. As well as the ncurses library for a friendly interface.
