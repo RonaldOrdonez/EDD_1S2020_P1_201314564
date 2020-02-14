@@ -45,6 +45,9 @@ class ListCharacters{
         ********************************************************************/
 
         void addNode(char character){
+            if(character==' '){
+
+            }else{
             NodeCharacter* new_node = new NodeCharacter(character);
 
             if(first==NULL){
@@ -59,6 +62,7 @@ class ListCharacters{
                 new_node->previous = aux;
                 new_node->next = NULL;      
             }
+            }        
         }
 
         /********************************************************************
