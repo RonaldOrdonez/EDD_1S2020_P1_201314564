@@ -169,6 +169,7 @@ public:
     }
 };
 
+/*
 int main()
 {
     ListWordsReplaced *list = new ListWordsReplaced();
@@ -180,4 +181,4 @@ int main()
     list->showList();
     list->graphList();
     return 0;
-}
+}*/

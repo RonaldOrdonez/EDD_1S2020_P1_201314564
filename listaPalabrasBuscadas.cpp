@@ -123,7 +123,7 @@ public:
     }
 
     //*************************************************************************
-    //METODO PARA GRAFICAR LOS NODOS DE LA LISTA SIMPLE
+    //METODO PARA GRAFICAR LOS NODOS DE LA LISTA DE PALABRAS BUSCADAS
     //*************************************************************************
     void graphList()
     {
@@ -171,6 +171,7 @@ public:
     }
 };
 
+/*
 int main()
 {
     ListWordsSerched *list = new ListWordsSerched();
@@ -183,4 +184,4 @@ int main()
     cout << "\n";
     list->graphList();
     return 0;
-}
+}*/

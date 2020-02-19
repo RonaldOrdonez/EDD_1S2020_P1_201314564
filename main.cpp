@@ -4,11 +4,16 @@
 #include <string>
 #include <ncurses.h>
 #include "listaCaracteres.cpp"
+#include "pilaCambiosRealizados.cpp"
+#include "pilaRevertidos.cpp"
 
 using namespace std;
 
 //INSTANCIA DE LAS CLASES A USAR
 ListCharacters* listaCaracteres=new ListCharacters();
+StackChangedMade* pilaCambiosRealizados = new StackChangedMade();
+NodeChangesMade* NodoCambios = new NodeChangesMade();
+StackReversed* pilaRevertidos = new StackReversed();
 
 //DEFINICIO DE LOS METODOS A UTILIZAR DURANTE LA EJECUCION DEL PROGRAMA
 void iniciarMenu();
@@ -78,22 +83,23 @@ void iniciarMenu()
 void windowEditor(){    
     int y = 22; //posicion en y para colocar el inicio de los nombres        
     clear(); //limpia la pantalla
-    mvprintw(21,2,"Presione una de las combinaciones para activar laas funciones mostradas.");
-    mvprintw(y,2,"FN+F2 Buscar y Reemplazar");
+    mvprintw(21,1,"==============================================================================");
+    mvprintw(y,1,"FN+F2 Buscar y Reemplazar");
     mvprintw(y,35,"FN+F3 Reportes");
-    mvprintw(y,58,"FN+F4 Guardar");
-    mvprintw(23,2,"FN+F5 Deshacer la ultima palabra");
-    mvprintw(23,35,"FN+F6 Rehacer la ultima palabra");
+    mvprintw(y,60,"FN+F4 Guardar");
+    mvprintw(23,1,"FN+F5 Deshacer accion");
+    mvprintw(23,35,"FN+F6 Rehacer accion");
     mvprintw(0,0,"");
     //getch();
     refresh(); //utiliza un refresh para actualizar la pantalla y que se muestren las letras    
     //int i=0;
     bool flag=true;
     int key;
-    int fila=0; //inicia la fila en 2
-    int columna=0; //inicia columna en 2    
+    int fila=0; //inicia la fila en 0
+    int columna=0; //inicia columna en 0
     while(flag){        
         key=getch(); //obteniendo el caracter
+        
         //FUNCION PARA BUSCAR Y REEMPLAZAR "F2"
         if(key==KEY_F(2)){
             mvprintw(6,2,"PRESIONO F2");
@@ -101,7 +107,7 @@ void windowEditor(){
         }
         //FUNCION PARA REPORTES "F3"
         else if(key==KEY_F(3)){
-            mvprintw(6,2,"PRESIONO F3");
+            windowReports(); 
             refresh();
         }
         //FUNCION PARA GUARDAR "F4"
@@ -109,12 +115,15 @@ void windowEditor(){
             mvprintw(6,2,"PRESIONO F4");
             refresh();
         }
-        //FUNCION PARA DESHACER ULTIMA LETRA "F5"
+        //FUNCION PARA DESHACER ULTIMA LETRA "F5", ES UN CTRL+Z
         else if(key==KEY_F(5)){
+            NodoCambios = pilaCambiosRealizados->pop(); //SACO EL NODO DE LA PILA
+            //INSERTO EL MISMO NODO EN LA OTRA PILA
+            pilaRevertidos->push(NodoCambios->word_serched, NodoCambios->word_replaced, "Revertido", NodoCambios->word, NodoCambios->positionCol, NodoCambios->positionRow);
             mvprintw(6,2,"PRESIONO F5");
             refresh();
         }
-        //FUNCION PARA REHACER ULTIMA LETRA "F6"
+        //FUNCION PARA REHACER ULTIMA LETRA "F6", ES UN CTRL+Y
         else if(key==KEY_F(6)){
             mvprintw(6,2,"PRESIONO F6");
             refresh();
@@ -134,9 +143,13 @@ void windowEditor(){
                 refresh();
                 columna++;
             }
-            //FUNCION QUE REALIZA CUANDO SE ELIMINA UNA LETRA
+             /*########################################
+            *ELIMINA UN CARACTER DE LA LISTA
+            *########################################
+            */
             if(key==8 || key==127 || key==KEY_BACKSPACE){
-                listaCaracteres->deleteNode();
+                listaCaracteres->deleteNode();  
+                pilaCambiosRealizados->push("null","null","No Revertido",to_string(key),columna,fila);              
                 columna--;                
                 mvaddch(fila,columna+1,32);
                 mvaddch(fila,columna+2,32);
@@ -149,9 +162,8 @@ void windowEditor(){
             *########################################
             */
             else{
-            //console_text[i]=key;
-            //mvprintw(1,2,console_text);
             listaCaracteres->addNode(key);             
+            pilaCambiosRealizados->push("null","null","No Revertido",to_string(key),columna,fila);
             mvaddch(fila,columna,key);
             refresh();
             columna++;
@@ -189,18 +201,14 @@ void windowOpenFile(){
 //###################################################################################
 void windowRecentFiles(){
     exit();
+    
 }
 
 //###################################################################################
 //##################### VENTANA PARA MOSTRAR REPORTES ###############################
 //###################################################################################
 void windowReports(){
-    clear();    
-    mvprintw(2,3,"ARCHIVO GENERADO CON EXITO");
-    refresh();
-    listaCaracteres->graphList();
-    getch();
-    iniciarMenu();
+    mvprintw(20,1,"Reportes: 1)LISTA CARACTERES     2)PALABRAS BUSCADAS     3)PALABRAS ORDENADAS");      
 }
 
 //###################################################################################
