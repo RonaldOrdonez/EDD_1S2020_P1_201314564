@@ -120,7 +120,7 @@ void windowEditor(){
             refresh();
         }
         //compara que los caracteres esten en un rango valido
-        else if((key>=33 && key<=126) || key==164 || key==165 || key==32 || key==9 || key==8 || key==127){            
+        else if((key>=33 && key<=126) || key==164 || key==165 || key==32 || key==9 || key==8 || key==127 || key==KEY_BACKSPACE){            
             //compara la barra espaciadora
             if(key==32){
                 mvaddch(fila,columna,key);
@@ -135,7 +135,7 @@ void windowEditor(){
                 columna++;
             }
             //FUNCION QUE REALIZA CUANDO SE ELIMINA UNA LETRA
-            if(key==8 || key==127){
+            if(key==8 || key==127 || key==KEY_BACKSPACE){
                 listaCaracteres->deleteNode();
                 columna--;                
                 mvaddch(fila,columna+1,32);
@@ -144,7 +144,10 @@ void windowEditor(){
                 mvprintw(fila,columna,"");
                 refresh();
             }              
-            //agrega el caracter a la lista
+            /*########################################
+            *AGREGA UN CARACTER VALIDO A LA LISTA
+            *########################################
+            */
             else{
             //console_text[i]=key;
             //mvprintw(1,2,console_text);

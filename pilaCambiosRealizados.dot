@@ -1,0 +1,10 @@
+digraph pilaCambiosRealizados{ 
+node[shape=record]; 
+node0[label=" Palabra Buscada: null\nReemplazada Por: null\nEstado: No Revertido\nPalabra: c\nPosicion: 5,1" ]; 
+node0->node1; 
+node1[label=" Palabra Buscada: null\nReemplazada Por: null\nEstado: No Revertido\nPalabra: a\nPosicion: 4,1" ]; 
+node1->node2; 
+node2[label=" Palabra Buscada: null\nReemplazada Por: null\nEstado: No Revertido\nPalabra: g\nPosicion: 3,1" ]; 
+node2->node3; 
+node3[label=" Palabra Buscada: null\nReemplazada Por: null\nEstado: No Revertido\nPalabra: 1\nPosicion: 2,1" ]; 
+}

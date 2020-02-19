@@ -9,147 +9,180 @@ using namespace std;
 //           LISTA DOBLEMENTE ENLAZADA SIMPLE QUE GUARDA CADA CARACTER
 //              INGRESADO AL MOMENTO DE ESCRIBIR EN LA CONSOLA
 //*************************************************************************************
-class NodeCharacter{
-    public:
-        char character;
-        NodeCharacter* next;
-        NodeCharacter* previous;
+class NodeCharacter
+{
+public:
+    char character;
+    NodeCharacter *next;
+    NodeCharacter *previous;
 
-    public: 
-        NodeCharacter(){
-            character=' ';
-            next=NULL;
-            previous=NULL;
-        }
+public:
+    NodeCharacter()
+    {
+        character = ' ';
+        next = NULL;
+        previous = NULL;
+    }
 
-        NodeCharacter(char character){
-            this->character = character;
-            next=NULL;
-            previous=NULL;
-        }
-        
+    NodeCharacter(char character)
+    {
+        this->character = character;
+        next = NULL;
+        previous = NULL;
+    }
 };
 
-class ListCharacters{
-    public:
-        NodeCharacter* first;
-    
-    public:
-        //CONSTRUCTOR
-        ListCharacters(){
-            first=NULL;
-        }
+class ListCharacters
+{
+public:
+    NodeCharacter *first;
 
-        /********************************************************************
+public:
+    //CONSTRUCTOR
+    ListCharacters()
+    {
+        first = NULL;
+    }
+
+    /********************************************************************
          * METODO PARA INSERTAR NODOS AL PRINCIPIO DE LA LISTA
         ********************************************************************/
 
-        void addNode(char character){
-            if(character==' '){
-
-            }else{
-            NodeCharacter* new_node = new NodeCharacter(character);
-
-            if(first==NULL){
-                first=new_node;
-            }
-            else{
-                NodeCharacter* aux=first;
-                while(aux->next!=NULL){
-                    aux=aux->next;
-                }
-                aux->next=new_node;
-                new_node->previous = aux;
-                new_node->next = NULL;      
-            }
-            }        
+    void addNode(char character)
+    {
+        if (character == ' ')
+        {
         }
+        else
+        {
+            NodeCharacter *new_node = new NodeCharacter(character);
 
-        /********************************************************************
+            if (first == NULL)
+            {
+                first = new_node;
+            }
+            else
+            {
+                first->previous=new_node;
+                new_node->next=first;
+                first=new_node;  
+            }
+        }
+    }
+
+    /********************************************************************
          * METODO PARA ELIMINAR NODOS DEL FINAL DE LA LISTA
-        *********************************************************************/
-        void deleteNode(){
-            NodeCharacter* aux_ = first;
-                while(aux_->next->next != NULL){
-                    aux_=aux_->next;
-                }
-                aux_->next->previous = NULL;
-                aux_->next=NULL;                
+    *********************************************************************/
+    void deleteNode()
+    {
+        first=first->next;
+        /*
+        NodeCharacter *aux_ = first;
+        while (aux_->next->next != NULL)
+        {
+            aux_ = aux_->next;
         }
+        aux_->next->previous = NULL;
+        aux_->next = NULL;*/
+    }
 
-        /********************************************************************
+    /********************************************************************
          * METODO PARA MOSTRAR LOS NODOS EN PANTALLA
         *********************************************************************/
-        void showList(){
-            NodeCharacter* temp=first;
-            cout<<first->character<<endl;
-            cout<<"anterior="<<"NULL"<<endl;
-            cout<<"siguiente="<<first->next->character<<endl;
-            cout<<"\n";
-            temp=temp->next;
-            while(temp->next !=NULL){
-                cout<<temp->character<<endl;
-                cout<<"anterior="<<temp->previous->character<<endl;
-                cout<<"siguiente="<<temp->next->character<<endl;
-                cout<<"\n";
-                temp=temp->next;
-            }
-            cout<<temp->character<<endl;
-            cout<<"anterior="<<temp->previous->character<<endl;
-            cout<<"siguiente="<<"NULL"<<endl;
+    void showList()
+    {
+        NodeCharacter *temp = first;
+        cout << first->character << endl;
+        cout << "anterior="
+             << "NULL" << endl;
+        cout << "siguiente=" << first->next->character << endl;
+        cout << "\n";
+        temp = temp->next;
+        while (temp->next != NULL)
+        {
+            cout << temp->character << endl;
+            cout << "anterior=" << temp->previous->character << endl;
+            cout << "siguiente=" << temp->next->character << endl;
+            cout << "\n";
+            temp = temp->next;
         }
+        cout << temp->character << endl;
+        cout << "anterior=" << temp->previous->character << endl;
+        cout << "siguiente="
+             << "NULL" << endl;
+    }
 
-        /********************************************************************
+    /********************************************************************
          * METODO PARA GRAFICAR LA LISTA DOBLEMENTE ENLAZADA
         *********************************************************************/
-       void graphList(){
-           if(first==NULL){
-               cout<<"Lista Vacia";
-           }
-           else{
-               NodeCharacter* aux=first;
-               int numNode=0;
-               string scriptGraph = "digraph caracteres{ \n";
-               scriptGraph+="node[shape=record]; \n";                                   
-               while(aux->next!=NULL){                                  
-                   scriptGraph+="node"+to_string(numNode)+"[label=";
-                   scriptGraph+=aux->character;
-                   scriptGraph+="];\n";                   
-                   scriptGraph+="node"+to_string(numNode);
-                   numNode=numNode+1;                   
-                   scriptGraph+="->node"+to_string(numNode);
-                   scriptGraph+=";\n";               
-                   scriptGraph+="node"+to_string(numNode); 
-                   numNode=numNode-1;                  
-                   scriptGraph+="->node"+to_string(numNode);
-                   scriptGraph+=";\n";
-                   numNode++;
-                   aux=aux->next;
-               }
-               scriptGraph+="node"+to_string(numNode)+"[label=";
-               scriptGraph+=aux->character;
-               scriptGraph+="];\n";         
-               scriptGraph+="}";
+    void graphList()
+    {
+        if (first == NULL)
+        {
+            cout << "Lista Vacia";
+        }
+        else
+        {
+            NodeCharacter *aux = first;
+            int numNode = 0;
+            string scriptGraph = "digraph caracteres{ \n";
+            scriptGraph += "node[shape=record]; \n";
+            while (aux->next != NULL)
+            {
+                // 34 es comillas, 47 es barra, 92 es barra invertida,
+                if (aux->character == 34 || aux->character == 47 || aux->character == 92)
+                {
+                    scriptGraph += "node" + to_string(numNode) + "[label=\"\\";
+                    scriptGraph += aux->character;
+                    scriptGraph += "\"];\n";
+                    scriptGraph += "node" + to_string(numNode);
+                    numNode = numNode + 1;
+                    scriptGraph += "->node" + to_string(numNode);
+                    scriptGraph += ";\n";
+                    scriptGraph += "node" + to_string(numNode);
+                    numNode = numNode - 1;
+                    scriptGraph += "->node" + to_string(numNode);
+                    scriptGraph += ";\n";
+                    numNode++;
+                    aux = aux->next;
+                }
+                else
+                {
+                    scriptGraph += "node" + to_string(numNode) + "[label=\"";
+                    scriptGraph += aux->character;
+                    scriptGraph += "\"];\n";
+                    scriptGraph += "node" + to_string(numNode);
+                    numNode = numNode + 1;
+                    scriptGraph += "->node" + to_string(numNode);
+                    scriptGraph += ";\n";
+                    scriptGraph += "node" + to_string(numNode);
+                    numNode = numNode - 1;
+                    scriptGraph += "->node" + to_string(numNode);
+                    scriptGraph += ";\n";
+                    numNode++;
+                    aux = aux->next;
+                }
+            }
+            scriptGraph += "node" + to_string(numNode) + "[label=";
+            scriptGraph += aux->character;
+            scriptGraph += "];\n";
+            scriptGraph += "}";
 
-               ofstream myFile;              
-               myFile.open("listaCaracteres.dot");
-               myFile<<scriptGraph;
-               myFile.close();
-               system("dot -Tpng listaCaracteres.dot -o listaCaracteres.png");               
-               system("shotwell listaCaracteres.png");
-               
-            
+            ofstream myFile;
+            myFile.open("listaCaracteres.dot");
+            myFile << scriptGraph;
+            myFile.close();
+            system("dot -Tpng listaCaracteres.dot -o listaCaracteres.png");
+            system("shotwell listaCaracteres.png");
+
             /*PARA UTILIZAR EN WINDOWS
             const char* cmdCrear="dot -Tpng caracteres.dot -o ListaCaracteres.png";
             const char* cmdExecute="cmd /c start ListaCaracteres.png";
             system(cmdCrear);
             system(cmdExecute);
             */
-               
-           }
-       }
-
-        
+        }
+    }
 };
 
 /*
