@@ -204,6 +204,7 @@ public:
     }
 };
 
+/*
 int main()
 {
     StackChangedMade *list = new StackChangedMade();
@@ -213,4 +214,4 @@ int main()
     list->push("null", "null", "No Revertido", "c", 1, 5);
     list->graphStack();
     return 0;
-}
+}*/

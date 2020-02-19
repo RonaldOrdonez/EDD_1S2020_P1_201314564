@@ -1,0 +1,11 @@
+digraph listaPalabrasReemplazadas{ 
+rankdir=LR; 
+node[shape=record]; 
+node0[label="1er\nReemplazo a: Primer"]; 
+node0->node1; 
+node1[label="ala\nReemplazo a: wing"]; 
+node1->node2; 
+node2[label="Sistemas\nReemplazo a: Sist"]; 
+node2->node3; 
+node3[label="U\nReemplazo a: Universidad"]; 
+}

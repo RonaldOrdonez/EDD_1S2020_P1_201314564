@@ -1,14 +1,18 @@
-#include <ncurses.h>
-#include <stdlib.h>
-#include <string.h>
 #include <iostream>
-#include <string>
-using namespace std;
+using std::string;
 
-
-
+// Prototipo de funciones
+string aMinuscula(string cadena);
 int main()
-{	
-	cout<<"'hola'";
-	return 0;
+{
+	string cadena = "HOLA";		
+	string minuscula = aMinuscula(cadena);
+	std::cout << "Minúscula: " + minuscula +"\n";
+}
+
+string aMinuscula(string cadena)
+{
+	for (int i = 0; i < cadena.length(); i++)
+		cadena[i] = tolower(cadena[i]);
+	return cadena;
 }
