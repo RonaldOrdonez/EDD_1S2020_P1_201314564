@@ -1,15 +1,9 @@
 digraph listaPalabrasBuscadas{ 
 rankdir=LR; 
 node[shape=record]; 
-node0[label="1er\nReemplazada por: primero"]; 
+node0[label=" domingo\nReemplazada por:  sabado"]; 
 node0->node1; 
-node1[label="Adan\nReemplazada por: wing"]; 
+node1[label=" domingo diA\nReemplazada por:  sabadomes"]; 
 node1->node2; 
-node2[label="ala\nReemplazada por: wing"]; 
-node2->node3; 
-node3[label="distrito\nReemplazada por: dis"]; 
-node3->node4; 
-node4[label="Hola\nReemplazada por: ride"]; 
-node4->node5; 
-node5[label="UVA\nReemplazada por: 10"]; 
+node2[label=" domingo diA es\nReemplazada por:  sabadomes de"]; 
 }

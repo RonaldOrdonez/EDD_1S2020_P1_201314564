@@ -1,12 +1,10 @@
 digraph archivosRecientes{ 
 rankdir=LR; 
 node[shape=record]; 
-node0[label="Archivo4\nhome/user/desktop/Archivo4"]; 
+node0[label="file3.txt\n/home/ronald/Documentos/EDD_1S2020_P1_201314564/file3.txt"]; 
 node0->node1; 
-node1[label="Archivo3\nhome/user/desktop/Archivo3"]; 
+node1[label="archivo2.txt\n/home/ronald/Documentos/EDD_1S2020_P1_201314564/archivo2.txt"]; 
 node1->node2; 
-node2[label="Archivo2\nhome/user/desktop/Archivo2"]; 
-node2->node3; 
-node3[label="Archivo1\nhome/user/desktop/Archivo1"]; 
-node3->node0; 
+node2[label="file1.txt\n/home/ronald/Documentos/EDD_1S2020_P1_201314564/file1.txt"]; 
+node2->node0; 
 }

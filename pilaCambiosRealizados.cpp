@@ -15,7 +15,7 @@ public:
     string word_serched;
     string word_replaced;
     string state;
-    string word;
+    char word;
     int positionCol;
     int positionRow;
     NodeChangesMade *next;
@@ -26,13 +26,13 @@ public:
         word_serched = "";
         word_replaced = "";
         state = "";
-        word = "";
+        word = ' ';
         positionCol = 0;
         positionRow = 0;
         next = NULL;
     }
 
-    NodeChangesMade(string word_serched, string word_replaced, string state, string word, int positionCol, int positionRow)
+    NodeChangesMade(string word_serched, string word_replaced, string state, char word, int positionCol, int positionRow)
     {
         this->word_serched = word_serched;
         this->word_replaced = word_replaced;
@@ -57,16 +57,30 @@ public:
         top = NULL;
     }
 
+     void clearOut(){
+        top=NULL;
+    }
+
     //****************************************************************
-    // METODO PARA AGREGAR(PUSH) EN LA PILA
+    // METODO PARA VERIFICAR SI PILA ESTA VACIA
     //****************************************************************
-    void push(string word_serched, string word_replaced, string state, string word, int positionCol, int positionRow)
-    {
-        if (word == " ")
-        {
+    bool isEmpty(){
+        if(top==NULL){
+            return true;
         }
         else
         {
+            return false;
+        }
+        
+    }
+
+    //****************************************************************
+    // METODO PARA AGREGAR(PUSH) EN LA PILA
+    //****************************************************************
+    void push(string word_serched, string word_replaced, string state, char word, int positionCol, int positionRow)
+    {    
+        
             NodeChangesMade *newNode = new NodeChangesMade(word_serched, word_replaced, state, word, positionCol, positionRow);
             if (top == NULL)
             {
@@ -77,13 +91,13 @@ public:
                 newNode->next = top;
                 top = newNode;
             }
-        }
+        
     }
 
     //****************************************************************
     // METODO PARA ELIMINAR O SACAR(POP) DE LA PILA
     //****************************************************************
-    NodeChangesMade *pop()
+    NodeChangesMade* pop()
     {
         NodeChangesMade *temp = top;
         top = top->next;
@@ -124,7 +138,7 @@ public:
             while (aux->next != NULL)
             {
                 // 34 es comillas, 47 es barra, 92 es barra invertida,
-                if (aux->word == "\"" || aux->word == "/")
+                if (aux->word == 34 || aux->word == 47 || aux->word==92)
                 {
                     scriptGraph += "node" + to_string(numNode) + "[label=\" Palabra Buscada: ";
                     scriptGraph += aux->word_serched + "\\" + "n";
@@ -136,7 +150,36 @@ public:
                     scriptGraph += aux->state + "\\" + "n";
 
                     scriptGraph += "Palabra: \\";
-                    scriptGraph += aux->word + "\\" + "n";
+                    scriptGraph += aux->word; 
+                    scriptGraph += "\\";
+                    scriptGraph += "n";
+
+
+                    scriptGraph += "Posicion: ";
+                    scriptGraph += to_string(aux->positionRow) + "," + to_string(aux->positionCol);
+                    scriptGraph += "\" ]; \n";
+
+                    scriptGraph += "node" + to_string(numNode);
+                    scriptGraph += "->";
+                    scriptGraph += "node" + to_string(numNode + 1);
+                    scriptGraph += "; \n";
+
+                    numNode++;
+                    aux = aux->next;
+                }
+                else if(aux->word == 32){
+                    scriptGraph += "node" + to_string(numNode) + "[label=\" Palabra Buscada: ";
+                    scriptGraph += aux->word_serched + "\\" + "n";
+
+                    scriptGraph += "Reemplazada Por: ";
+                    scriptGraph += aux->word_replaced + "\\" + "n";
+
+                    scriptGraph += "Estado: ";
+                    scriptGraph += aux->state + "\\" + "n";
+
+                    scriptGraph += "Palabra: ";                    
+                    scriptGraph += "\\";
+                    scriptGraph += "n";
 
                     scriptGraph += "Posicion: ";
                     scriptGraph += to_string(aux->positionRow) + "," + to_string(aux->positionCol);
@@ -163,7 +206,10 @@ public:
                     scriptGraph += aux->state + "\\" + "n";
 
                     scriptGraph += "Palabra: ";
-                    scriptGraph += aux->word + "\\" + "n";
+                    scriptGraph += aux->word; 
+                    scriptGraph += "\\";
+                    scriptGraph += "n";
+
 
                     scriptGraph += "Posicion: ";
                     scriptGraph += to_string(aux->positionRow) + "," + to_string(aux->positionCol);
@@ -187,7 +233,10 @@ public:
             scriptGraph += aux->state + "\\" + "n";
 
             scriptGraph += "Palabra: ";
-            scriptGraph += aux->word + "\\" + "n";
+            scriptGraph += aux->word; 
+            scriptGraph += "\\";
+            scriptGraph += "n";
+
 
             scriptGraph += "Posicion: ";
             scriptGraph += to_string(aux->positionRow) + "," + to_string(aux->positionCol);

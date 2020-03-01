@@ -45,6 +45,19 @@ public:
         last = NULL;
     }
 
+    void clearOut(){
+        first=NULL;
+    }
+
+    bool isEmpty(){
+        if(first==NULL){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     /*********************************************************************
          * METODO PARA AGREGAR LOS ARCHIVOS ABIERTOS RECIENTEMENTE A LA LISTA
          * UTILIZANDO UNA INSERCION AL INICIO PARA QUE LOS ABIERTOS RECIEN

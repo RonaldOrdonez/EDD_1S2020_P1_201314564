@@ -1,10 +1,14 @@
 digraph pilaRevertidos{ 
 node[shape=record]; 
-node0[label=" Palabra Buscada: null\nReemplazada Por: null\nEstado: Revertido\nPalabra: A\nPosicion: 5,1" ]; 
+node0[label=" Palabra Buscada: null\nReemplazada Por: null\nEstado: Revertido\nPalabra: c\nPosicion: 0,33" ]; 
 node0->node1; 
-node1[label=" Palabra Buscada: null\nReemplazada Por: null\nEstado: Revertido\nPalabra: L\nPosicion: 4,1" ]; 
+node1[label=" Palabra Buscada: null\nReemplazada Por: null\nEstado: Revertido\nPalabra: a\nPosicion: 0,34" ]; 
 node1->node2; 
-node2[label=" Palabra Buscada: null\nReemplazada Por: null\nEstado: Revertido\nPalabra: O\nPosicion: 3,1" ]; 
+node2[label=" Palabra Buscada: null\nReemplazada Por: null\nEstado: Revertido\nPalabra: c\nPosicion: 0,35" ]; 
 node2->node3; 
-node3[label=" Palabra Buscada: null\nReemplazada Por: null\nEstado: Revertido\nPalabra: H\nPosicion: 2,1" ]; 
+node3[label=" Palabra Buscada: null\nReemplazada Por: null\nEstado: Revertido\nPalabra: i\nPosicion: 0,36" ]; 
+node3->node4; 
+node4[label=" Palabra Buscada: null\nReemplazada Por: null\nEstado: Revertido\nPalabra: o\nPosicion: 0,37" ]; 
+node4->node5; 
+node5[label=" Palabra Buscada: null\nReemplazada Por: null\nEstado: Revertido\nPalabra: n\nPosicion: 0,38" ]; 
 }

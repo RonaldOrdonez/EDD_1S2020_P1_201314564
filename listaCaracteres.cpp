@@ -44,29 +44,64 @@ public:
         first = NULL;
     }
 
+    void clearOut()
+    {
+        first = NULL;
+    }
+
+    /****************************************************************
+    *DEVUELVE SI LA LISTA ESTA VACIA O NO
+    * ***************************************************************
+    */
+
+    bool isEmpty()
+    {
+        if (first == NULL)
+            return true;
+        else
+        {
+            return false;
+        }
+    }
+
     /********************************************************************
          * METODO PARA INSERTAR NODOS AL PRINCIPIO DE LA LISTA
         ********************************************************************/
 
     void addNode(char character)
     {
-        if (character == ' ')
+        NodeCharacter *new_node = new NodeCharacter(character);
+
+        if (first == NULL)
         {
+            first = new_node;
         }
         else
         {
-            NodeCharacter *new_node = new NodeCharacter(character);
+            first->previous = new_node;
+            new_node->next = first;
+            first = new_node;
+        }
+    }
 
-            if (first == NULL)
+    void addNodeLast(char character)
+    {
+        NodeCharacter *new_node = new NodeCharacter(character);
+
+        if (first == NULL)
+        {
+            first = new_node;
+        }
+        else
+        {
+            NodeCharacter *temp = first;
+            while (temp->next != NULL)
             {
-                first = new_node;
+                temp = temp->next;
             }
-            else
-            {
-                first->previous=new_node;
-                new_node->next=first;
-                first=new_node;  
-            }
+
+            temp->next = new_node;
+            new_node->previous = temp;
         }
     }
 
@@ -75,15 +110,25 @@ public:
     *********************************************************************/
     void deleteNode()
     {
-        first=first->next;
-        /*
-        NodeCharacter *aux_ = first;
-        while (aux_->next->next != NULL)
+        first = first->next;
+    }
+
+    void deleteLast()
+    {
+        if (first == NULL)
         {
-            aux_ = aux_->next;
+            cout << "LISTA VACIA";
         }
-        aux_->next->previous = NULL;
-        aux_->next = NULL;*/
+        else
+        {
+            NodeCharacter *aux_ = first;
+            while (aux_->next->next != NULL)
+            {
+                aux_ = aux_->next;
+            }
+            aux_->next->previous = NULL;
+            aux_->next = NULL;
+        }
     }
 
     /********************************************************************
@@ -134,6 +179,21 @@ public:
                 {
                     scriptGraph += "node" + to_string(numNode) + "[label=\"\\";
                     scriptGraph += aux->character;
+                    scriptGraph += "\"];\n";
+                    scriptGraph += "node" + to_string(numNode);
+                    numNode = numNode + 1;
+                    scriptGraph += "->node" + to_string(numNode);
+                    scriptGraph += ";\n";
+                    scriptGraph += "node" + to_string(numNode);
+                    numNode = numNode - 1;
+                    scriptGraph += "->node" + to_string(numNode);
+                    scriptGraph += ";\n";
+                    numNode++;
+                    aux = aux->next;
+                }
+                else if (aux->character == 32)
+                {
+                    scriptGraph += "node" + to_string(numNode) + "[label=\"";
                     scriptGraph += "\"];\n";
                     scriptGraph += "node" + to_string(numNode);
                     numNode = numNode + 1;

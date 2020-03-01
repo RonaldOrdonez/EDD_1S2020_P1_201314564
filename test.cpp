@@ -1,18 +1,14 @@
-#include <iostream>
-using std::string;
+#include <unistd.h>
+#include <stdio.h>
+#include <limits.h>
 
-// Prototipo de funciones
-string aMinuscula(string cadena);
-int main()
-{
-	string cadena = "HOLA";		
-	string minuscula = aMinuscula(cadena);
-	std::cout << "Minúscula: " + minuscula +"\n";
-}
-
-string aMinuscula(string cadena)
-{
-	for (int i = 0; i < cadena.length(); i++)
-		cadena[i] = tolower(cadena[i]);
-	return cadena;
+int main() {
+   char cwd[PATH_MAX];
+   if (getcwd(cwd, sizeof(cwd)) != NULL) {
+       printf("Current working dir: %s\n", cwd);
+   } else {
+       perror("getcwd() error");
+       return 1;
+   }
+   return 0;
 }
