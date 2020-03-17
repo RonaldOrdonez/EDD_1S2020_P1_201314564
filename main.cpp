@@ -294,8 +294,6 @@ void windowEditor()
     exit();
 }
 
-
-
 //###################################################################################
 //######## VENTANA ABRIR UN ARCHIVO Y MOSTRARLO EN EL EDITOR DE TEXTO ###############
 //###################################################################################
@@ -358,61 +356,61 @@ void buscarYReemplazar()
     if (palabrasAfectadas > 0)
     {
         for (int i = 0; i < 70; i++)
-    {
-        mvaddch(0, i, 32);
-        refresh();
-    }
-    for (int i = 0; i < 70; i++)
-    {
-        mvaddch(1, i, 32);
-        refresh();
-    }
-    for (int i = 0; i < 70; i++)
-    {
-        mvaddch(2, i, 32);
-        refresh();
-    }
-    for (int i = 0; i < 70; i++)
-    {
-        mvaddch(3, i, 32);
-        refresh();
-    }
-    for (int i = 0; i < 70; i++)
-    {
-        mvaddch(4, i, 32);
-        refresh();
-    }
-    for (int i = 0; i < 70; i++)
-    {
-        mvaddch(5, i, 32);
-        refresh();
-    }
+        {
+            mvaddch(0, i, 32);
+            refresh();
+        }
+        for (int i = 0; i < 70; i++)
+        {
+            mvaddch(1, i, 32);
+            refresh();
+        }
+        for (int i = 0; i < 70; i++)
+        {
+            mvaddch(2, i, 32);
+            refresh();
+        }
+        for (int i = 0; i < 70; i++)
+        {
+            mvaddch(3, i, 32);
+            refresh();
+        }
+        for (int i = 0; i < 70; i++)
+        {
+            mvaddch(4, i, 32);
+            refresh();
+        }
+        for (int i = 0; i < 70; i++)
+        {
+            mvaddch(5, i, 32);
+            refresh();
+        }
 
-    for (int i = 0; i < 70; i++)
-    {
-        mvaddch(6, i, 32);
-        refresh();
-    }
-    for (int i = 0; i < 70; i++)
-    {
-        mvaddch(7, i, 32);
-        refresh();
-    }
-    for (int i = 0; i < 70; i++)
-    {
-        mvaddch(8, i, 32);
-        refresh();
-    }
-    for (int i = 0; i < 70; i++)
-    {
-        mvaddch(9, i, 32);
-        refresh();
-    }
-    for (int i = 0; i < 70; i++)
-    {
-        mvaddch(10, i, 32);
-        refresh();
-    }
+        for (int i = 0; i < 70; i++)
+        {
+            mvaddch(6, i, 32);
+            refresh();
+        }
+        for (int i = 0; i < 70; i++)
+        {
+            mvaddch(7, i, 32);
+            refresh();
+        }
+        for (int i = 0; i < 70; i++)
+        {
+            mvaddch(8, i, 32);
+            refresh();
+        }
+        for (int i = 0; i < 70; i++)
+        {
+            mvaddch(9, i, 32);
+            refresh();
+        }
+        for (int i = 0; i < 70; i++)
+        {
+            mvaddch(10, i, 32);
+            refresh();
+        }
 
         for (int i = 0; i < 35; i++)
 
